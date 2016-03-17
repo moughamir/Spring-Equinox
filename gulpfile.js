@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     del = require('del');
 
 var paths = {
-  sass: ['sass/main.scss'],
+  sass: ['sass/**/*'],
   svg: 'assets/img/**/*.svg',
   css: 'assets/css/'
 },
