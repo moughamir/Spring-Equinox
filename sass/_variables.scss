@@ -1,0 +1,21 @@
+// 
+$imgPath : "../img/";
+// general layout style
+$cols: 12;
+$container-width: 940px;
+$gutter-width: 20px;
+$header : dfdfd;
+///  Colors
+$primary : #E3B6B3,rgba(227, 182, 179, 1);
+$primary-opacity: 0.6;
+$secondary: ;
+$tertiary:;
+/// typography
+$font-primary :'Ubuntu Condensed', sans-serif;
+$font-secondary:'Arya', sans-serif;
+$line-height: $font-size * 1.6;
+// botto#F74D4Dn
+$btn-bg : #EB3088,rgba(235, 48, 136, 1);
+$btn-shadow : 0 5px 6px 0px rgba(53, 43, 1, 0.65), inset 1px 0px #ffffff;
+$btn-size : @include size(56px, 246px);
+$btn-hover: lighten($btn-bg, 5%);

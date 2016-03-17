@@ -1,0 +1,66 @@
+///Opacity
+/// @description : Set the opacity for all browsers and provide a filter fallback for IE8.
+/// @see : https://web-design-weekly.com/2013/05/12/handy-sass-mixins/#Opacity
+/// @example : .article-heading {@include opacity(0.6);}
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+///Retina Images
+/// @author : Jason Zimdars <http://37signals.com/svn/posts/3271-easy-retina-ready-images-using-scss>
+///This mixin by Jason Zimdars is a breeze to use and offers a greater visual experience
+/// to those that are lucky enough to have a retina device.
+///@example : div.logo {background: url("logo.png")
+///no-repeat;@include image-2x("logo2x.png", 100px, 25px);}
+@mixin image-2x($image, $width, $height) {
+    @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+        /* on retina, use image that's scaled by 2 */
+        background-image: url($image);
+        background-size: $width $height;
+    }
+}
+
+/// Responive BreakPoint
+/// My most utilised mixin that I don’t think I could live without anymore.
+/// Just set your breakpoint at whatever width you desire and go crazy.
+/// @example .page-wrap {width: 75%;@include breakpoint(large) { width: 60%; }@include breakpoint(medium) { width: 80%; }@include breakpoint(small) { width: 95%; }}
+@mixin breakpoint($point) {
+    @if $point==large {
+        @media (min-width: 64.375em) {
+            @content;
+        }
+    }
+    @else if $point==medium {
+        @media (min-width: 50em) {
+            @content;
+        }
+    }
+    @else if $point==small {
+        @media (min-width: 37.5em) {
+            @content;
+        }
+    }
+}
+/// Grid System
+/// Loop to create the grid
+///@for $i from 1 through 12 {
+///  .l-col-#{$i} {
+///    @include col($i);
+///  }
+///}
+///// Styles
+//////.l-cols { @include groupfix();margin-top: 20px;&:first-child {margin-top: 0;}}[class^="l-col-"] {box-sizing: border-box;float: left;padding: 0 1em;&:first-child {margin-left: 0;}}
+/// HTML
+/// .l-cols > l-col-$ (from 1 to 12)
+@mixin col($col) {
+  width: (($container-width - $gutter-width*($cols/$col - 1))/($cols/$col))/$container-width*100%;
+}
+@mixin groupfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

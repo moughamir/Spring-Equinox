@@ -1,0 +1,36 @@
+/// font size mixin
+/// @author : Caleb W <https://coderwall.com/calebo>
+/// @see : https://coderwall.com/p/ml9zxg/sass-mixin-for-rem-font-sizing-line-height-with-px-fallback
+/// @example : body {@include font-size(26);}
+@mixin font-size($sizeValue: 16, $line: $sizeValue * 1.6) {
+    font-size: ($sizeValue) + px;
+    line-height: ($line) + px;
+    font-size: ($sizeValue / 16) + rem;
+    line-height: ($line / 16) + rem;
+}
+
+///Text Overflow
+/// @description : An easy way to truncate text with an ellipsis.
+/// Requires the element to be block or inline-block.
+/// @example : .text-truncate {@include text-truncate;}
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/// for form (input)
+/// placeHolder
+/// @example : input {@include placeholder(color red, font-style italic);}
+@mixin placeholder($contents...) {
+    $prefixes: ':-webkit' '-moz' ':-moz' '-ms';
+    @each $prefix in $prefixes {
+        &:#{$prefix}-input-placeholder {
+            @each $content in $contents {
+                $property: nth($content, 1);
+                $value: nth($content, 2);
+                #{$property}: unquote($value);
+            }
+        }
+    }
+}
